@@ -1,0 +1,23 @@
+Create a PHP file that handles all database requests and outputs all data to JSON for use in your Javascript file. This file should:
+Connect to your database
+Limit all requests to 20 rows
+Format a date and time to match the design from the SQL date
+Only return rows where all fields are filled in
+Handle a simple text search of Title and Company
+Handle sorting by particular columns (default sort column is Title)
+Return well-formed JSON
+Create a Javascript file (and any libraries, if needed) to:
+Handle Ajax requests to your PHP file
+Bind DOM events for search and column sorting
+Append results to the table shown in design
+Create HTML and CSS files that:
+Are flexible and responsive on the desktop
+Use no PHP or server-side code
+Additional Considerations:
+Please include all pre-compiled files you create, such as LESS, SASS, CoffeeScript, etc
+Include recommendations in your execution for improvements to user experience such as real or perceived speed, animations, live search, etc.
+Credit 3rd party scripts and their origins.
+You are welcome to use your favorite libraries, classes, etc. But avoid adding unnecessary bulk.
+Let me know if you have any questions about scope, functionality, or anything else before beginning. Your completed project should include all necessary files and instructions for setup on a local server.
+
+The goal would be to have this complete and back to us by EOW. Let me know if that is doable for you.
