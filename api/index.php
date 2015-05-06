@@ -27,16 +27,16 @@ if(isset($request[2])){
 			}
 
 			//get direction of results
-			$direction = (isset($_REQUEST["dir"]) && preg_match("/asc|desc/i", $_REQUEST["dir"]) )?$_REQUEST["dir"]:'desc';
+			$direction = (isset($_REQUEST["dir"]) && preg_match("/^(asc|desc)$/i", $_REQUEST["dir"]) )?$_REQUEST["dir"]:'desc';
 
 			//get sort by order
-			$order = (isset($_REQUEST["order"]) && preg_match("/\w/i",$_REQUEST["order"]) )?' order by ' . $_REQUEST["order"] . ' ' . $direction:' order by created ' . $direction;
+			$order = (isset($_REQUEST["order"]) && preg_match("/^(id|title|code|company)$/i",$_REQUEST["order"]) )?' order by ' . $_REQUEST["order"] . ' ' . $direction:' order by created ' . $direction;
 
 			//build query
 			$query = "select *, DATE_FORMAT(created,'%c/%e/%Y') as niceDate, LOWER(DATE_FORMAT(created,'%l:%i%p')) as niceTime from job_listings " . $search_statement . $order . " limit 20";
 			$myDB->execute($query);
 
-			error_log($query);
+			//error_log($query);
 
 			//if no results returned.
 			if($myDB->dataRows()>0){
