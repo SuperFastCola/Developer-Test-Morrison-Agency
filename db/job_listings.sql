@@ -1,9 +1,11 @@
-create table job_listings (
+DROP TABLE IF EXISTS `job_listings`;
+
+CREATE TABLE IF NOT EXISTS `job_listings` (
 	id INT,
 	title VARCHAR(50),
 	code INT,
 	company VARCHAR(50),
-	created DATE
+	created DATETIME
 );
 insert into job_listings (id, title, code, company, created) values (1, 'VP Quality Control', 4730, 'Roombo', '2015-04-15 04:38:59');
 insert into job_listings (id, title, code, company, created) values (2, 'VP Marketing', 8803, 'Wordpedia', '2014-07-05 18:43:46');

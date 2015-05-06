@@ -33,8 +33,10 @@ if(isset($request[2])){
 			$order = (isset($_REQUEST["order"]) && preg_match("/\w/i",$_REQUEST["order"]) )?' order by ' . $_REQUEST["order"] . ' ' . $direction:' order by created ' . $direction;
 
 			//build query
-			$query = "select *, DATE_FORMAT(created,'%c/%e/%Y') as niceDate from job_listings " . $search_statement . $order . " limit 20";
+			$query = "select *, DATE_FORMAT(created,'%c/%e/%Y') as niceDate, LOWER(DATE_FORMAT(created,'%l:%i%p')) as niceTime from job_listings " . $search_statement . $order . " limit 20";
 			$myDB->execute($query);
+
+			error_log($query);
 
 			//if no results returned.
 			if($myDB->dataRows()>0){
