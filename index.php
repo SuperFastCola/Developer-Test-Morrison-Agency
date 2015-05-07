@@ -14,9 +14,9 @@
 	<div class="holder">
 		<div class="header_area">
 			<h1><span>A List of Things</span></h1>
-			<a class="reset">Reset</a>
+			<a class="reset">Refresh</a>
 			<div class="search_area">
-					<input type="text" name="criteria" class="search_field" value="" />
+					<input type="text" name="criteria" class="search_field" value="" placeholder="Search Some Stuff" />
 					<div class="sort_message">Showing <b>1-8</b> <span class="sm_rows">Row</span></div>
 			</div>
 			<div class="sorting_nav">
