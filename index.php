@@ -1,5 +1,6 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<!--[if lte IE 8]> <html xmlns="http://www.w3.org/1999/xhtml" class="ie8-and-lower"> <![endif]-->
+<!--[if !IE]><!--> <html xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
 <head>
 	<title>Developer Test - Anthony Baker</title>
 	<meta charset="utf-8" />
