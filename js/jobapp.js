@@ -117,7 +117,7 @@
 			}
 		});
 
-		$(".refresh").bind('click',function(){
+		$(".reset").bind('click',function(){
 			$(".search_field").val("");
 			my.setParameters();
 			my.getData(true);

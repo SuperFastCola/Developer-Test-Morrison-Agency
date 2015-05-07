@@ -5,7 +5,7 @@
 	<title>Developer Test - Anthony Baker</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/jobapp.js"></script>
 </head>
@@ -13,8 +13,8 @@
 
 	<div class="holder">
 		<div class="header_area">
-			<h1>A list of things</h1>
-			<button class="refresh">Reset</button>
+			<h1><span>A List of Things</span></h1>
+			<a class="reset">Reset</a>
 			<div class="search_area">
 					<input type="text" name="criteria" class="search_field" value="" />
 					<div class="sort_message">Showing <b>1-8</b> <span class="sm_rows">Row</span></div>
@@ -29,6 +29,7 @@
 		<div class="jobs_area">
 		</div>
 	</div>
+
 	<script id="jobtemplate" type="text/template">
 	 <div class="jobrow">
 	 	<span class="jobdata title"></span>
@@ -40,6 +41,7 @@
 	 	</span>
 	 </div>
 	</script>
+
 	<script id="jobtemplate_noresults" type="text/template">
 	 <div class="jobrow noresults"></div>
 	</script>
