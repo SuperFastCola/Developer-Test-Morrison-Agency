@@ -3,7 +3,15 @@
 	// object holder
 	var my = {};
 	my.ready = null;
-	my.queryParams = {};
+
+	my.setParameters = function(){
+		my.queryParams = {
+			dir:null,
+			search:null,
+			order: null,
+			ids: new Array()
+		};
+	}
 
 	my.startCheck = function(){
 		my.ready = setInterval(my.checkForJQuery,10);
@@ -17,30 +25,72 @@
 		}
 	}
 
+	my.countsRows = function(total){
+		console.log(total);
+
+		if(total>0){
+			$(".sort_message").show();
+			if(total>1){
+				$(".sort_message").find("b").text("1-" + total);
+				$(".sort_message").find(".sm_rows").text("Rows");
+			}
+			else{
+				$(".sort_message").find("b").text("1");
+				$(".sort_message").find(".sm_rows").text("Row");
+			}
+		}else{
+			$(".sort_message").hide();
+		}
+	}
+
 	my.showsJobs = function(output){
 		$(".jobs_area").empty();
 
-		var html = "";
-		for(var i in output.results){
-			html += output.results[i].id + " ";
-			html += output.results[i].title + " ";
-			html += output.results[i].code + " ";
-			html += output.results[i].company + " ";
-			html += output.results[i].niceDate + " ";
-			html += "<br/>";
+		var template = null;
+		
+		my.queryParams.ids = new Array();
 
+		var currentrow = null;
+
+		if(String(output.results[0]).match(/no\sresults/i)){
+			template = $.trim($("#jobtemplate_noresults").html());
+			currentrow = $(template).clone();
+			$(currentrow).text(output.results[0]);
+			$(".jobs_area").append(currentrow);
+			my.countsRows(0);
 		}
-		$(".jobs_area").html(html);
+		else{
+			
+			template = $.trim($("#jobtemplate").html());
+
+			for(var i in output.results){
+				my.queryParams.ids.push(output.results[i].id);
+
+				currentrow = $(template).clone();
+				$(currentrow).find(".title").text(output.results[i].title);
+				$(currentrow).find(".code").text(output.results[i].code);
+				$(currentrow).find(".company").text(output.results[i].company);
+				$(currentrow).find(".created span").text(output.results[i].niceDate);
+				$(currentrow).find(".created small").text(output.results[i].niceTime);
+				$(".jobs_area").append(currentrow);
+			}
+			my.countsRows(output.results.length);
+		}
+
+
+		currentrow = template = null;
 	}
 
-	my.getData = function(){
+	my.getData = function(clearids){
+
+		if(typeof clearids != "undefined"){
+			my.queryParams.ids = new Array();	
+		}
 
 		var promise = $.ajax({
-		    contentType: 'application/json',
 		    url: "api/jobs",
 			dataType: "json",
-		    data: JSON.stringify(my.queryParams),
-			processData: false,			
+		    data: my.queryParams,
 			type: 'POST'
 		} );
 
@@ -51,12 +101,33 @@
 		} );
 	}
 
-	my.assignFunctions = function(){
+	my.sortColumns = function(e){
+		my.queryParams.order = $(e.currentTarget).attr("data-ref");
+		my.queryParams.dir = (my.queryParams.dir=="desc")?"asc":"desc";
+		my.getData();
+	}
 
+	my.assignFunctions = function(){
+		$(".sorting_nav").find("a").bind('click',my.sortColumns);
+		$(".search_field").keyup(function(){
+
+			if(my.queryParams.search==null || my.queryParams.search!=$(this).val()){
+				my.queryParams.search = $(this).val();
+				my.getData(true);
+			}
+		});
+
+		$(".refresh").bind('click',function(){
+			$(".search_field").val("");
+			my.setParameters();
+			my.getData(true);
+		});
 	}
 
 	my.init = function () {
+		my.setParameters();
 		my.getData();
+		my.assignFunctions();
 	}
 	
 	return my;

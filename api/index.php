@@ -2,11 +2,16 @@
 header('Content-type: application/json');
 
 $message = new stdClass();
-$message->results = array();
-$request = explode("/",$_SERVER["REQUEST_URI"]);
+$message->results = array("No Results Found");
 
-if(isset($request[2])){
-	switch($request[2]){
+$request = explode("/",$_SERVER["REQUEST_URI"]);
+$request = $request[sizeof($request)-1];
+
+error_log(json_encode($_REQUEST));
+
+
+if(isset($request)){
+	switch($request){
 		case 'jobs':
 			//if request uri matchs jobs
 			define('ROOT_DIR', preg_replace("/\/api/","", dirname(realpath(__FILE__))) . "/"); // need to add trailing slash
@@ -16,7 +21,7 @@ if(isset($request[2])){
 			$search_statement = "where title is not null and company is not null";
 
 			//get search string match
-			if(isset($_REQUEST["search"])){
+			if(isset($_REQUEST["search"]) && preg_match("/\w/",$_REQUEST["search"])){
 
 				//clean evil characters
 				$search_criteria = $myDB->clean($_REQUEST["search"]);
@@ -26,14 +31,24 @@ if(isset($request[2])){
 									" or title like '%" . $search_criteria .  "%') ";		
 			}
 
+
+
+			if(isset($_REQUEST["ids"]) && gettype($_REQUEST["ids"])=="array" && sizeof($_REQUEST["ids"])>0 ){
+				$ids_part = " and id in (" . implode(",",$_REQUEST["ids"]) . ")";
+			}
+			else{
+				$ids_part = "";
+			}
+
 			//get direction of results
-			$direction = (isset($_REQUEST["dir"]) && preg_match("/^(asc|desc)$/i", $_REQUEST["dir"]) )?$_REQUEST["dir"]:'desc';
+			$direction = (isset($_REQUEST["dir"]) && preg_match("/^(asc|desc)$/i", $_REQUEST["dir"]) )?$_REQUEST["dir"]:'asc';
+
 
 			//get sort by order
-			$order = (isset($_REQUEST["order"]) && preg_match("/^(id|title|code|company)$/i",$_REQUEST["order"]) )?' order by ' . $_REQUEST["order"] . ' ' . $direction:' order by title ' . $direction;
+			$order = (isset($_REQUEST["order"]) && preg_match("/^(title|code|company|created)$/i",$_REQUEST["order"]) )?' order by ' . $_REQUEST["order"] . ' ' . $direction:' order by title ' . $direction;
 
 			//build query
-			$query = "select *, DATE_FORMAT(created,'%c/%e/%Y') as niceDate, LOWER(DATE_FORMAT(created,'%l:%i%p')) as niceTime from job_listings " . $search_statement . $order . " limit 20";
+			$query = "select *, DATE_FORMAT(created,'%c/%e/%Y') as niceDate, LOWER(DATE_FORMAT(created,'%l:%i%p')) as niceTime from job_listings " . $search_statement . $ids_part . $order . " limit 20";
 			$myDB->execute($query);
 
 			error_log($query);
