@@ -358,6 +358,7 @@ body {
   .holder .header_area .search_area .search_field {
     width: 87%;
     margin: 10px auto 0px auto;
+    height: auto;
   }
   .holder .header_area .search_area .sort_message {
     float: none;
