@@ -6,7 +6,7 @@
 
 	my.setParameters = function(){
 		my.queryParams = {
-			dir:null,
+			dir:"asc",
 			search:null,
 			order: null,
 			ids: new Array()
@@ -26,8 +26,6 @@
 	}
 
 	my.countsRows = function(total){
-		console.log(total);
-
 		if(total>0){
 			$(".sort_message").show();
 			if(total>1){
@@ -66,7 +64,10 @@
 			for(var i in output.results){
 				my.queryParams.ids.push(output.results[i].id);
 
+				var rowclass = (i%2==0)?"odd":"";
+
 				currentrow = $(template).clone();
+				$(currentrow).addClass(rowclass);
 				$(currentrow).find(".title").text(output.results[i].title);
 				$(currentrow).find(".code").text(output.results[i].code);
 				$(currentrow).find(".company").text(output.results[i].company);
@@ -104,11 +105,23 @@
 	my.sortColumns = function(e){
 		my.queryParams.order = $(e.currentTarget).attr("data-ref");
 		my.queryParams.dir = (my.queryParams.dir=="desc")?"asc":"desc";
+
+		$(".sorting_nav").find("a").removeClass('asc desc');
+		$(e.currentTarget).addClass(my.queryParams.dir);
+
 		my.getData();
 	}
 
 	my.assignFunctions = function(){
 		$(".sorting_nav").find("a").bind('click',my.sortColumns);
+		
+		$(".search_field").focus(function(){
+			var text = String($(this).val());
+			if(text.match(/search\ssome\sstuff/i)){
+				$(this).val("");
+			}	
+		});
+
 		$(".search_field").keyup(function(){
 
 			if(my.queryParams.search==null || my.queryParams.search!=$(this).val()){
@@ -120,6 +133,8 @@
 		$(".reset").bind('click',function(){
 			$(".search_field").val("");
 			my.setParameters();
+			$(".sorting_nav").find("a").removeClass('asc desc');
+			$(".sort.title").addClass(my.queryParams.dir);
 			my.getData(true);
 		});
 	}

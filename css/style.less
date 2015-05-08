@@ -1,11 +1,17 @@
 @import "style_main.less";
 
 @blue1: #4c5465;
+@blue_sort: #4c5465;
+@blue_title:#008cc6;
+@blue_code:#9eb5c5;
+@blue_time:#aab1c2;
 
 @gray_border: #bfc1c2;
 @gray_border_light: #dedede;
 @gray_back: #f6f7f8;
 @gray_field: #9f9fa0;
+@gray_shadow: #dfdfdf;
+@gray_extra_light:#fafbfc;
 
 @green_light: #80b11e;
 @green_dark: #679a02;
@@ -57,6 +63,18 @@ html,body{
   margin-top: -(@h/2);
   margin-left: -(@w/2);
   .backcolor(white);
+
+
+
+    @row1: 344px;
+    @row2: 130px;
+    @row3: 317px;
+    @row4: 131px;
+
+    @rowpadtop: 15px;
+    @rowpadleft: 20px;
+    @rowheight:48px;
+
 
   .header_area{
     position:relative;
@@ -127,8 +145,145 @@ html,body{
       }
     }
 
+
+    .sorting_nav{
+
+      position: relative;
+      .block_size(100%,48px);
+      .shadow(0px 0px 5px @gray_shadow);
+      border-bottom: 1px solid @gray_border_light;
+
+      a{
+
+          display:block;
+          position: absolute;
+          border-right: 1px solid @gray_border_light;
+          font-size: 14px;
+          color: @blue_sort;
+          font-weight: bold;
+          height:@rowheight - @rowpadtop;
+          padding-left: @rowpadleft;
+          padding-top: @rowpadtop;
+
+          .button_behavior(@blue1);
+
+          .backpos(right,center);
+          background-repeat: no-repeat;
+
+          &.desc{
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjcyMkY2NEE4RUM5MDExRTRBMUMxRTZCMTdGMjdFQTBGIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjcyMkY2NEE5RUM5MDExRTRBMUMxRTZCMTdGMjdFQTBGIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzIyRjY0QTZFQzkwMTFFNEExQzFFNkIxN0YyN0VBMEYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NzIyRjY0QTdFQzkwMTFFNEExQzFFNkIxN0YyN0VBMEYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz47FmJoAAAAW0lEQVR42mI8c+YMAxrIAuL/QDwdWZAFTZEzEE+Csm8C8T6YBBOSIlUgXgvEzFC8DohV0BUKAPE2IOZH0ghib4eJMUGtX4usGwmoQE1mZoK6yYkBNwDJTQYIMADUfA2F18JuCAAAAABJRU5ErkJggg==);
+          }
+
+          &.asc{
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjcyMkY2NEE0RUM5MDExRTRBMUMxRTZCMTdGMjdFQTBGIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjcyMkY2NEE1RUM5MDExRTRBMUMxRTZCMTdGMjdFQTBGIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzIyRjY0QTJFQzkwMTFFNEExQzFFNkIxN0YyN0VBMEYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NzIyRjY0QTNFQzkwMTFFNEExQzFFNkIxN0YyN0VBMEYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz50epoqAAAAW0lEQVR42mI8c+bMNAYGhkwG/GA6E5DIBeJ9eBSB5PJACv8CcRAQ38GiCCQWDMR/mKACH4HYE0ozIIl5AfEHEIcJTXcQ1Ia/UJNuwyRZsLgH5GZGIN6LLAEQYACq/BVK8myjHQAAAABJRU5ErkJggg==);
+          }
+
+        }
+
+    }
+
   }
 
+  .jobs_area{
+    overflow-x: hidden;
+    overflow-y:scroll;
+    -webkit-overflow-scrolling:touch;
+    height:390px;
+  }
+
+  .jobrow{
+      position: relative;
+      width:100%;
+      height:@rowheight;
+      border-bottom: 1px solid @gray_border_light;
+
+      span{
+        display:block;
+        position: absolute;
+        font-size: 14px;
+        font-weight: normal;
+        height:@rowheight - @rowpadtop;
+        padding-left: @rowpadleft;
+        padding-top: @rowpadtop;
+      }
+
+      &.odd{
+        .backcolor(@gray_extra_light);
+      }
+
+      &.noresults{
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 380px;
+        font-size: 16pt;
+        height:auto;
+      }
+    }
+
+
+    .sorting_nav a,.jobdata{
+      &.title{
+        @w: @row1 - @rowpadleft;
+        left: 0%;
+        width: @w;
+        .backpos(@w,center);
+      }
+
+      &.code{
+        @w: @row2 - @rowpadleft;
+        left: @row1;
+        width: @w;
+        .backpos(@w,center);
+      }
+
+      &.company{
+        @w: @row3 - @rowpadleft;
+        left: @row1 + @row2;
+        width: @w;
+        .backpos(@w,center);
+      }
+
+      &.created{
+        @w: @row4 - @rowpadleft;
+        left: @row1 + @row2 + @row3;
+        width: @w;
+        .backpos(@w,center);
+        border: 0px;
+      }
+    }
+
+    .jobdata.title{
+      color:@blue_title;
+    }
+    .jobdata.code{
+      color:@blue_code;
+    }
+    .jobdata.company{
+     color:@blue_sort; 
+    }
+    .jobdata.created{
+      padding:10px 0px 0px @rowpadleft !important;
+      color:@blue_sort;
+
+      span{
+        display: block;
+        float:none;
+        height:auto;
+        position: relative;
+         padding:0px !important;
+        margin:0px;
+      }
+
+      small{
+        font-size:12px;
+        font-weight: bold;
+        color:@blue_time;
+      }
+
+    }
+}
+
+.ie8-and-lower{
 
 }
 
