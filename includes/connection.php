@@ -1,4 +1,6 @@
 <?php
+//these CLASSES are WRITTEN BY ANthony Baker
+
 //command line PHP requires <?php at top of required/included files - otherwise see them as text
 define('MAIN_DIRECTORY', preg_replace("/\/includes/","", dirname(realpath(__FILE__))) . "/"); // need to add trailing slash
 define('DB_DOCUMENT_ROOT', dirname(realpath(__FILE__)) . "/"); // need to add trailing slash

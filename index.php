@@ -8,9 +8,9 @@
 	<title>Developer Test - Anthony Baker</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" href="css/style.css<?=$c?>">
+	<link rel="stylesheet" type="text/css" href="css/style.css<?php echo $c; ?>">
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="js/jobapp.js<?=$c?>"></script>
+	<script type="text/javascript" src="js/jobapp.js<?php echo $c; ?>"></script>
 </head>
 <body>
 

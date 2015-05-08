@@ -1,0 +1,47 @@
+CREDITS:
+-----------------------
+3rd Party JavaScript: JQuery
+Database Classes written by Anthony Baker
+
+TESTED on PHP 5.4 and 5.6 systems.
+
+Browser checked on:
+-----------------------
+Windows 7: IE 8-10, Chrome, Firefox, Opera
+Mac OS X: Safari, Opera, Chrome, Firefox
+Mobile: Ipad 1 - IOS 5, Iphone - IOS 8
+
+Installation Instructions:
+-----------------------
+
+Step 1:
+-----------------------
+Place in any subdirectory or root level of site.
+
+Step 2:
+-----------------------
+Update Database so that created column is a "DATETIME" type instead of "DATE"
+SQL file in "db" directory has correct structure
+
+Step 3:
+-----------------------
+Update config.php with your database connection info
+
+Step 4:
+-----------------------
+This should not be necessary:
+
+If the AJAX request throws an error most likely:
+Directory level overrides are not allowed from an .htaccess file.
+This is usually the default on most host providers.
+http://httpd.apache.org/docs/2.2/mod/core.html#allowoverride
+
+Please note: HTTPD 2.2 & HTTPD 2.4 have different phrasing.
+
+Recommendations:
+-----------------------
+CSS Transitions on job rows. Possibly inline delays on opacity so they appear one after the other.
+Some kind of loading action, sometime the server couldbe slow.
+I turned the refresh button
+
+
