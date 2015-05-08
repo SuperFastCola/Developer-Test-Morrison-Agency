@@ -23,11 +23,24 @@ Step 2:
 Update Database so that created column is a "DATETIME" type instead of "DATE"
 SQL file in "db" directory has correct structure
 
+Example from command line:
+mysql -u USERNAME --password=PASSWORD DATABASE_NAME < job_listings.sql
+
 Step 3:
 -----------------------
 Update config.php with your database connection info
 
-Step 4:
+Config.php document array structure
+
+$env_config = array(
+	'db_host' => "127.0.0.1", //or localhost
+	'db_user' => "DATABASE-USER",
+	'db_pass' => "DATABASE-PASSWORD",
+	'db_name' => "DATABASE-NAME",
+	'db_port' => "3306"
+);
+
+Possible Step 4:
 -----------------------
 This should not be necessary:
 
@@ -40,8 +53,14 @@ Please note: HTTPD 2.2 & HTTPD 2.4 have different phrasing.
 
 Recommendations:
 -----------------------
-CSS Transitions on job rows. Possibly inline delays on opacity so they appear one after the other.
-Some kind of loading action, sometime the server couldbe slow.
-I turned the refresh button
+1. CSS Transitions on job rows. Possibly inline delays on opacity so they appear one after the other.
+2. Some kind of loading action, sometime the server couldbe slow.
+3. More CSS Tuning for other browsers
+
+Other:
+-----------------------
+I turned the refresh button into a reset button that clears all queryies.
+Implemnted live search
+
 
 
